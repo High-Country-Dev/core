@@ -1,0 +1,92 @@
+{
+  "name": "@mtndev/react-core",
+  "version": "0.0.0",
+  "private": false,
+  "license": "MIT",
+  "type": "module",
+  "main": "cjs/index.cjs",
+  "module": "esm/index.js",
+  "types": "esm/index.d.ts",
+  "scripts": {
+    "add-component": "pnpm dlx shadcn@latest add && prettier src --write --list-different",
+    "build": "node ../../scripts/build/build.js",
+    "clean": "node ../../scripts/build/clean.js",
+    "dev": "concurrently \"pnpm tailwind:watch\" \"pnpm storybook:watch\" --names \"tw,sb\" --prefix-colors \"#3b82f6,#ff528c\" --handle-input --default-input-target 1",
+    "format": "prettier --check src --ignore-path ../../.gitignore --ignore-path ../../.prettierignore",
+    "lint": "eslint src  --max-warnings 0 --report-unused-disable-directives",
+    "pre:storybook:build": "pnpm tailwind:emit",
+    "storybook:build": "storybook build",
+    "storybook:watch": "storybook dev -p 6006",
+    "tailwind:emit": "tailwindcss -i ./tailwind.css -o ./.storybook/global.css --",
+    "tailwind:watch": "pnpm tailwind:emit --watch",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
+  },
+  "peerDependencies": {
+    "class-variance-authority": "^0.7.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "tailwindcss": "^3.4.14"
+  },
+  "dependencies": {
+    "radix-ui": "1.1.2",
+    "tailwind-merge": "^2.6.0"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "^8.6.2",
+    "@storybook/addon-interactions": "^8.6.2",
+    "@storybook/addon-onboarding": "^8.6.2",
+    "@storybook/addon-themes": "^8.6.2",
+    "@storybook/blocks": "^8.6.2",
+    "@storybook/react": "^8.6.2",
+    "@storybook/react-vite": "^8.6.2",
+    "@storybook/test": "^8.6.2",
+    "@types/react": "~18.3.12",
+    "eslint-plugin-storybook": "^0.12.0",
+    "storybook": "^8.6.2",
+    "typescript": "^5.8.3"
+  },
+  "exports": {
+    ".": {
+      "import": "./esm/index.js",
+      "require": "./cjs/index.cjs"
+    },
+    "./utils/ui": {
+      "import": "./esm/utils/ui/index.js",
+      "require": "./cjs/utils/ui/index.cjs"
+    },
+    "./utils/ui/cn": {
+      "import": "./esm/utils/ui/cn/index.js",
+      "require": "./cjs/utils/ui/cn/index.cjs"
+    },
+    "./utils": {
+      "import": "./esm/utils/index.js",
+      "require": "./cjs/utils/index.cjs"
+    },
+    "./components": {
+      "import": "./esm/components/index.js",
+      "require": "./cjs/components/index.cjs"
+    },
+    "./components/button": {
+      "import": "./esm/components/button/index.js",
+      "require": "./cjs/components/button/index.cjs"
+    },
+    "./components/button/button.props": {
+      "import": "./esm/components/button/button.props.js",
+      "require": "./cjs/components/button/button.props.cjs"
+    },
+    "./components/button/button.data": {
+      "import": "./esm/components/button/button.data.js",
+      "require": "./cjs/components/button/button.data.cjs"
+    },
+    "./components/button/button.component": {
+      "import": "./esm/components/button/button.component.js",
+      "require": "./cjs/components/button/button.component.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/High-Country-Dev/core.git",
+    "directory": "packages/react-core"
+  }
+}

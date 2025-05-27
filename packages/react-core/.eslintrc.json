@@ -1,0 +1,8 @@
+{
+  "extends": [
+    "@mtndev/eslint-config/typescript",
+    "@mtndev/eslint-config/react",
+    "plugin:storybook/recommended",
+    "prettier"
+  ]
+}

@@ -1,0 +1,4 @@
+## code changes will send PR to following users
+scripts/build/ @rnarcos
+scripts/release/staging/ @rnarcos
+* @rnarcos @StartScape @RafaelMDM @dnishiyama

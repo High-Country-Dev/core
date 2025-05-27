@@ -1,0 +1,73 @@
+{
+  "name": "@mtndev/eslint-config",
+  "version": "0.0.0",
+  "license": "MIT",
+  "type": "commonjs",
+  "private": false,
+  "peerDependencies": {
+    "@next/eslint-plugin-next": "^14.2.23",
+    "@typescript-eslint/eslint-plugin": "^5.25.0",
+    "@typescript-eslint/parser": "^5.25.0",
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsonc": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint-plugin-typescript-sort-keys": "^2.3.0"
+  },
+  "peerDependenciesMeta": {
+    "@next/eslint-plugin-next": {
+      "optional": true
+    },
+    "@typescript-eslint/eslint-plugin": {
+      "optional": true
+    },
+    "@typescript-eslint/parser": {
+      "optional": true
+    },
+    "eslint-plugin-jsx-a11y": {
+      "optional": true
+    },
+    "eslint-plugin-react": {
+      "optional": true
+    },
+    "eslint-plugin-react-hooks": {
+      "optional": true
+    },
+    "eslint-plugin-simple-import-sort": {
+      "optional": true
+    },
+    "eslint-plugin-typescript-sort-keys": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@next/eslint-plugin-next": "^14.2.23",
+    "@typescript-eslint/eslint-plugin": "^5.25.0",
+    "@typescript-eslint/parser": "^5.25.0",
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsonc": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint-plugin-typescript-sort-keys": "^2.3.0"
+  },
+  "exports": {
+    "./base": "./base.cjs",
+    "./nextjs": "./nextjs.cjs",
+    "./react": "./react.cjs",
+    "./typescript": "./typescript.cjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/High-Country-Dev/core.git",
+    "directory": "packages/eslint-config"
+  }
+}

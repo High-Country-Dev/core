@@ -1,0 +1,24 @@
+{
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "eslint.enable": true,
+  "eslint.format.enable": true,
+  "eslint.rules.customizations": [{ "rule": "*", "severity": "warn" }],
+  "editor.snippetSuggestions": "bottom",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "files.eol": "\n",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib"
+}

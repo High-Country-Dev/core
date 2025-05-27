@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["src", "nativewind-env.d.ts"],
+  "exclude": ["src/**/*.test.*", "src/**/__tests__/**/*"],
+  "compilerOptions": {
+    "noEmit": false,
+    "emitDeclarationOnly": true
+  }
+}
