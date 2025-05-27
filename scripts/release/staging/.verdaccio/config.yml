@@ -1,0 +1,22 @@
+storage: ./storage
+auth:
+  htpasswd:
+    file: ./htpasswd
+uplinks:
+  npmjs:
+    url: https://registry.npmjs.org/
+packages:
+  "@mtndev/*":
+    access: $all
+    publish: $authenticated
+    proxy: npmjs
+  "@*/*":
+    access: $all
+    publish: $authenticated
+    proxy: npmjs
+  "**":
+    access: $all
+    publish: $authenticated
+    proxy: npmjs
+logs:
+  - { type: stdout, format: pretty, level: http }

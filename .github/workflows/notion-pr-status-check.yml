@@ -1,0 +1,23 @@
+name: Notion PR Status Check
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches:
+      - staging
+      - master
+      - main
+
+jobs:
+  check-notion-status:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Check Notion PR Status
+        uses: High-Country-Dev/notion-pr-status-check-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          notion-token: ${{ secrets.NOTION_GITHUB_API_KEY }}
+          notion-database-id: ${{ secrets.NOTION_TASK_DATABASE_ID }}
