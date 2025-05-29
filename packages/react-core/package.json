@@ -4,9 +4,9 @@
   "private": false,
   "license": "MIT",
   "type": "module",
-  "main": "cjs/index.cjs",
-  "module": "esm/index.js",
-  "types": "esm/index.d.ts",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "types": "src/index.ts",
   "scripts": {
     "add-component": "pnpm dlx shadcn@latest add && prettier src --write --list-different",
     "build": "node ../../scripts/build/build.js",
@@ -46,42 +46,15 @@
     "typescript": "^5.8.3"
   },
   "exports": {
-    ".": {
-      "import": "./esm/index.js",
-      "require": "./cjs/index.cjs"
-    },
-    "./utils/ui": {
-      "import": "./esm/utils/ui/index.js",
-      "require": "./cjs/utils/ui/index.cjs"
-    },
-    "./utils/ui/cn": {
-      "import": "./esm/utils/ui/cn/index.js",
-      "require": "./cjs/utils/ui/cn/index.cjs"
-    },
-    "./utils": {
-      "import": "./esm/utils/index.js",
-      "require": "./cjs/utils/index.cjs"
-    },
-    "./components": {
-      "import": "./esm/components/index.js",
-      "require": "./cjs/components/index.cjs"
-    },
-    "./components/button": {
-      "import": "./esm/components/button/index.js",
-      "require": "./cjs/components/button/index.cjs"
-    },
-    "./components/button/button.props": {
-      "import": "./esm/components/button/button.props.js",
-      "require": "./cjs/components/button/button.props.cjs"
-    },
-    "./components/button/button.data": {
-      "import": "./esm/components/button/button.data.js",
-      "require": "./cjs/components/button/button.data.cjs"
-    },
-    "./components/button/button.component": {
-      "import": "./esm/components/button/button.component.js",
-      "require": "./cjs/components/button/button.component.cjs"
-    },
+    ".": "./src/index.ts",
+    "./utils/ui": "./src/utils/ui/index.ts",
+    "./utils/ui/cn": "./src/utils/ui/cn/index.ts",
+    "./utils": "./src/utils/index.ts",
+    "./components": "./src/components/index.ts",
+    "./components/button": "./src/components/button/index.ts",
+    "./components/button/button.props": "./src/components/button/button.props.ts",
+    "./components/button/button.data": "./src/components/button/button.data.ts",
+    "./components/button/button.component": "./src/components/button/button.component.tsx",
     "./package.json": "./package.json"
   },
   "repository": {

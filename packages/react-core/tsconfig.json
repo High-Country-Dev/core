@@ -1,6 +1,6 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["src"],
+  "include": ["src", ".storybook/stories"],
   "compilerOptions": {
     "lib": ["dom", "dom.iterable"],
     "jsx": "react-jsx"
