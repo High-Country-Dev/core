@@ -21,6 +21,8 @@ yarn-error.log*
 .turbo
 
 # Packages output
+configs/*/.cache
 packages/*/.cache
+configs/*/.tgz
 packages/*/*.tgz
 packages/*/storybook-static/*

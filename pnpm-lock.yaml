@@ -16,10 +16,10 @@ importers:
         version: 2.29.4
       '@mtndev/eslint-config':
         specifier: ^0.0.0-test.0
-        version: link:packages/eslint-config
+        version: link:configs/eslint-config
       '@mtndev/tailwind-config':
         specifier: ^0.0.0-test.0
-        version: link:packages/tailwind-config
+        version: link:configs/tailwind-config
       '@next/eslint-plugin-next':
         specifier: ^14.2.23
         version: 14.2.23
@@ -132,7 +132,13 @@ importers:
         specifier: ^6.1.2
         version: 6.1.2(typanion@3.14.0)
 
-  packages/eslint-config:
+  configs/environment-config:
+    devDependencies:
+      typescript:
+        specifier: ^5.8.3
+        version: 5.8.3
+
+  configs/eslint-config:
     devDependencies:
       '@next/eslint-plugin-next':
         specifier: ^14.2.23
@@ -173,6 +179,15 @@ importers:
       eslint-plugin-typescript-sort-keys:
         specifier: ^2.3.0
         version: 2.3.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.8.3))(eslint@8.57.1)(typescript@5.8.3)
+
+  configs/tailwind-config:
+    dependencies:
+      nativewind:
+        specifier: ^4.1.23
+        version: 4.1.23(react-native-reanimated@3.17.5(@babel/core@7.27.1)(react-native@0.79.2(@babel/core@7.27.1)(@react-native-community/cli@12.3.0)(@types/react@19.1.5)(react@19.1.0))(react@19.1.0))(react-native@0.79.2(@babel/core@7.27.1)(@react-native-community/cli@12.3.0)(@types/react@19.1.5)(react@19.1.0))(react@19.1.0)(tailwindcss@3.4.17(ts-node@10.9.2(@swc/core@1.11.24)(@types/node@22.10.10)(typescript@5.8.3)))
+      tailwindcss:
+        specifier: ^3.4.14
+        version: 3.4.17(ts-node@10.9.2(@swc/core@1.11.24)(@types/node@22.10.10)(typescript@5.8.3))
 
   packages/react-core:
     dependencies:
@@ -231,15 +246,6 @@ importers:
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
-
-  packages/tailwind-config:
-    dependencies:
-      nativewind:
-        specifier: ^4.1.23
-        version: 4.1.23(react-native-reanimated@3.17.5(@babel/core@7.27.1)(react-native@0.79.2(@babel/core@7.27.1)(@react-native-community/cli@12.3.0)(@types/react@19.1.5)(react@19.1.0))(react@19.1.0))(react-native@0.79.2(@babel/core@7.27.1)(@react-native-community/cli@12.3.0)(@types/react@19.1.5)(react@19.1.0))(react@19.1.0)(tailwindcss@3.4.17(ts-node@10.9.2(@swc/core@1.11.24)(@types/node@22.10.10)(typescript@5.8.3)))
-      tailwindcss:
-        specifier: ^3.4.14
-        version: 3.4.17(ts-node@10.9.2(@swc/core@1.11.24)(@types/node@22.10.10)(typescript@5.8.3))
 
 packages:
 
@@ -866,12 +872,6 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
-
-  '@eslint-community/eslint-utils@4.4.1':
-    resolution: {integrity: sha512-s3O3waFUrMV8P/XaF/+ZTp1X9XBZW1a4B97ZnjQF2KYWaFD2A8KyFBsrsfSjEmjn3RGWAIuvlneuZm3CUK3jbA==}
-    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-    peerDependencies:
-      eslint: ^6.0.0 || ^7.0.0 || >=8.0.0
 
   '@eslint-community/eslint-utils@4.7.0':
     resolution: {integrity: sha512-dyybb3AcajC7uha6CvhdVRJqaKyn7w2YKqKyAN37NKYgZT36w+iRb0Dymmc5qEJ549c/S31cMMSFd75bteCpCw==}
@@ -6986,11 +6986,6 @@ snapshots:
   '@esbuild/win32-x64@0.25.4':
     optional: true
 
-  '@eslint-community/eslint-utils@4.4.1(eslint@8.57.1)':
-    dependencies:
-      eslint: 8.57.1
-      eslint-visitor-keys: 3.4.3
-
   '@eslint-community/eslint-utils@4.7.0(eslint@8.57.1)':
     dependencies:
       eslint: 8.57.1
@@ -8742,7 +8737,7 @@ snapshots:
 
   '@typescript-eslint/utils@5.62.0(eslint@8.57.1)(typescript@5.8.3)':
     dependencies:
-      '@eslint-community/eslint-utils': 4.4.1(eslint@8.57.1)
+      '@eslint-community/eslint-utils': 4.7.0(eslint@8.57.1)
       '@types/json-schema': 7.0.15
       '@types/semver': 7.7.0
       '@typescript-eslint/scope-manager': 5.62.0
@@ -10169,7 +10164,7 @@ snapshots:
 
   eslint@8.57.1:
     dependencies:
-      '@eslint-community/eslint-utils': 4.4.1(eslint@8.57.1)
+      '@eslint-community/eslint-utils': 4.7.0(eslint@8.57.1)
       '@eslint-community/regexpp': 4.12.1
       '@eslint/eslintrc': 2.1.4
       '@eslint/js': 8.57.1
