@@ -16,5 +16,19 @@ RUN pnpm install --frozen-lockfile
 # Build the action and its dependencies
 RUN pnpm build --filter=@mtndev/clean-up-preview-deployment
 
+# Debug: List contents of /github/workspace (this is where GitHub Actions mounts the repo)
+RUN echo "=== Contents of /github/workspace ===" && \
+    ls -la /github/workspace || echo "Directory not found" && \
+    echo "" && \
+    echo "=== Contents of current working directory ===" && \
+    ls -la && \
+    echo "" && \
+    echo "=== Contents of actions directory ===" && \
+    ls -la actions || echo "actions directory not found" && \
+    echo "" && \
+    echo "=== Contents of actions/clean-up-preview-deployment ===" && \
+    ls -la actions/clean-up-preview-deployment || echo "clean-up-preview-deployment directory not found"
+
+
 # Set the entry point to your action
 ENTRYPOINT ["node", "actions/clean-up-preview-deployment/cjs/index.cjs"]
