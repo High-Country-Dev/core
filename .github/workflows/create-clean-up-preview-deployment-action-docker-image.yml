@@ -4,9 +4,9 @@ on:
   push:
     branches:
       - feat/adding-environment-config
-    paths:
-      - actions/clean-up-preview-deployment/src/**
-      - Dockerfile.clean-up-preview-deployment-action
+    # paths:
+    #   - actions/clean-up-preview-deployment/src/**
+    #   - Dockerfile.clean-up-preview-deployment-action
 
 jobs:
   publish:
