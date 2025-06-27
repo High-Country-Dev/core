@@ -36,7 +36,7 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/clean-up-preview-deployment
+          IMAGE_NAME=ghcr.io/${{ github.repository_owner,, }}/clean-up-preview-deployment
           docker build -f Dockerfile.clean-up-preview-deployment-action -t $IMAGE_NAME:latest -t $IMAGE_NAME:${{ steps.vars.outputs.sha_short }} .
           docker push $IMAGE_NAME:latest
           docker push $IMAGE_NAME:${{ steps.vars.outputs.sha_short }}
