@@ -7,7 +7,6 @@ on:
 jobs:
   test-cleanup-action:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.number == 7
 
     steps:
       - name: Checkout code
