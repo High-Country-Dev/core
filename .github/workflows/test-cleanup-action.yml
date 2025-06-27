@@ -1,0 +1,22 @@
+name: Test Clean Up Preview Deployment Action
+
+on:
+  pull_request:
+    types: [synchronize]
+
+jobs:
+  test-cleanup-action:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.number == 7
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Test Clean Up Preview Deployment Action
+        uses: High-Country-Dev/core@feat/adding-environment-config
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          doppler-token: ${{ secrets.DOPPLER_TOKEN }}
+        env:
+          PR_NUMBER: '7'
