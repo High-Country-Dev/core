@@ -1,0 +1,11 @@
+name: 'MtnDev: Stub'
+description: "Stub: Don't use this action directly. Read [the documentation](https://github.com/High-Country-Dev/core/tree/main/actions) instead."
+author: 'GitHub'
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Stub'
+      run: |
+        echo 'This is a stub. Read [the documentation](https://github.com/High-Country-Dev/core/tree/main/actions) instead.'
+        exit 1
+      shell: bash

@@ -1,6 +1,5 @@
+import { generatePreviewDeploymentDatabaseUrl } from '../utils/db/index.js';
 import { isPreviewDeployment } from './environment.js';
-
-const DATABASE_PREVIEW_SUFFIX = '_preview';
 
 /**
  * This is used to get the Vercel deployment information.
@@ -35,12 +34,9 @@ export const vercelInfo: VercelInfo =
         gitCommitRef: process.env.VERCEL_GIT_COMMIT_REF,
         gitBranchUrl: process.env.VERCEL_BRANCH_URL,
         isPreviewDeployment,
-        // TODO: Add documentation on how this is working
-        databaseUrl: process.env.DATABASE_URL.replace(
-          /_[^_]*$/,
-          `_${process.env.VERCEL_GIT_COMMIT_REF.replace(/[^a-zA-Z0-9]/g, '_')}`,
-        )
-          .concat(DATABASE_PREVIEW_SUFFIX)
-          .toLowerCase(),
+        databaseUrl: generatePreviewDeploymentDatabaseUrl(
+          process.env.DATABASE_URL,
+          process.env.VERCEL_GIT_COMMIT_REF,
+        ),
       }
     : null;

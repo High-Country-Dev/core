@@ -1,0 +1,3 @@
+{
+  "extends": ["@mtndev/eslint-config/typescript", "prettier"]
+}

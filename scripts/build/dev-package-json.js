@@ -6,7 +6,7 @@ import { program } from 'commander';
 import { glob } from 'glob';
 import { readPackageJson, writePackageJson } from './utils.js';
 
-const workspaces = ['configs', 'packages'];
+const workspaces = ['actions', 'configs', 'packages'];
 
 const packagesGlobs = workspaces.map((workspace) => `${workspace}/*/src`);
 

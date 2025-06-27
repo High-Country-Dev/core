@@ -1,0 +1,13 @@
+name: 'MtnDev: Clean up Preview Deployments artifacts'
+description: 'Cleans up preview deployments artifacts'
+
+inputs:
+  github-token:
+    description: 'GitHub token'
+    required: true
+  doppler-token:
+    description: 'Doppler token'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
