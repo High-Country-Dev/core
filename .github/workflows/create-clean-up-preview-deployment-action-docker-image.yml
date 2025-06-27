@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - feat/adding-environment-config
-    paths:
-      - actions/clean-up-preview-deployment/**
-      - Dockerfile.clean-up-preview-deployment-action
-      - .github/workflows/create-clean-up-preview-deployment-action-docker-image.yml
+    # branches:
+    #   - feat/adding-environment-config
+    # paths:
+    #   - actions/clean-up-preview-deployment/**
+    #   - Dockerfile.clean-up-preview-deployment-action
+    #   - .github/workflows/create-clean-up-preview-deployment-action-docker-image.yml
 
 jobs:
   publish:
