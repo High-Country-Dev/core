@@ -17,31 +17,32 @@ interface PullRequest {
 }
 
 function getInputSecrets() {
-  const githubToken =
-    process.env.GITHUB_TOKEN ??
-    actions.getInput('github-token', {
-      required: true,
-      trimWhitespace: true,
-    });
+  const githubToken = actions.getInput('github-token', {
+    required: true,
+    trimWhitespace: true,
+  });
   if (!githubToken) {
     throw new Error('GitHub token is not set. Exiting.');
   }
 
-  const dopplerToken =
-    process.env.DOPPLER_TOKEN ??
-    actions.getInput('doppler-token', {
-      required: true,
-      trimWhitespace: true,
-    });
+  const dopplerToken = actions.getInput('doppler-token', {
+    required: true,
+    trimWhitespace: true,
+  });
   if (!dopplerToken) {
     throw new Error('Doppler token is not set. Exiting.');
   }
 
-  return { githubToken, dopplerToken };
+  const prNumber = actions.getInput('pr-number', {
+    required: false,
+    trimWhitespace: true,
+  });
+
+  return { githubToken, dopplerToken, prNumber };
 }
 
 async function getPreviewDeploymentBranchName() {
-  const pullRequestNumber = process.env.PR_NUMBER ?? null;
+  const { prNumber } = getInputSecrets();
   let currentPullRequest: PullRequest | null = null;
 
   switch (true) {
@@ -51,13 +52,19 @@ async function getPreviewDeploymentBranchName() {
       break;
     }
 
-    case typeof pullRequestNumber === 'string': {
+    case typeof prNumber === 'string' && prNumber !== '': {
+      const pullRequestNumber = parseInt(prNumber, 10);
+
+      if (Number.isNaN(pullRequestNumber)) {
+        throw new Error('Pull request number is not a number. Exiting.');
+      }
+
       const { githubToken } = getInputSecrets();
       const octokit = github.getOctokit(githubToken);
 
       const { data: pullRequestData } = await octokit.rest.pulls.get({
         ...github.context.repo,
-        pull_number: parseInt(pullRequestNumber, 10),
+        pull_number: pullRequestNumber,
       });
 
       currentPullRequest = pullRequestData as PullRequest;

@@ -8,6 +8,9 @@ inputs:
   doppler-token:
     description: 'Doppler token'
     required: true
+  pr-number:
+    description: 'Pull request number'
+    required: false
 
 runs:
   using: 'composite'

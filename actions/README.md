@@ -49,10 +49,11 @@ Automatically cleans up preview deployment databases when pull requests are clos
 
 #### Inputs
 
-| Input           | Description                          | Required | Default               |
-| --------------- | ------------------------------------ | -------- | --------------------- |
-| `github-token`  | GitHub token for API access          | Yes      | `${{ github.token }}` |
-| `doppler-token` | Doppler API token for secrets access | Yes      | -                     |
+| Input           | Description                            | Required | Default               |
+| --------------- | -------------------------------------- | -------- | --------------------- |
+| `github-token`  | GitHub token for API access            | Yes      | `${{ github.token }}` |
+| `doppler-token` | Doppler API token for secrets access   | Yes      | -                     |
+| `pr-number`     | Pull request number for manual cleanup | No       | -                     |
 
 #### Environment Variables
 
@@ -85,8 +86,36 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           doppler-token: ${{ secrets.DOPPLER_TOKEN }}
-        env:
-          PR_NUMBER: ${{ github.event.inputs.pr_number }}
+```
+
+##### Manual Cleanup with Specific PR Number
+
+```yaml
+name: Manual Clean Up Preview Deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'Pull request number to clean up'
+        required: true
+        type: number
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Clean up preview deployment
+        uses: High-Country-Dev/core@main/actions/clean-up-preview-deployment
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          doppler-token: ${{ secrets.DOPPLER_TOKEN }}
+          pr-number: ${{ github.event.inputs.pr_number }}
+```
 
 #### Required Secrets
 
@@ -124,8 +153,8 @@ This action works seamlessly with Vercel preview deployments:
 
 **Common Issues:**
 
-1. **"Could not determine pull request number"**: Ensure the action is triggered by a pull request event or provide `PR_NUMBER` environment variable
-2. **"Failed to fetch secrets from Doppler"**: Verify your `DOPPLER_TOKEN` is valid and has access to the project
-3. **"Attempting to drop a protected database"**: The action correctly prevents dropping production/staging databases
-4. **"Attempting to drop a non-preview database"**: Only databases ending with `_preview` can be dropped
-```
+1. **"Could not determine pull request number"**: Ensure the action is triggered by a pull request event or provide `pr-number` input parameter
+2. **"Pull request number is not a number"**: Ensure the `pr-number` input can be converted to a number (`parseInt(inputs['pr-number'], 10)`)
+3. **"Failed to fetch secrets from Doppler"**: Verify your `DOPPLER_TOKEN` is valid and has access to the project
+4. **"Attempting to drop a protected database"**: The action correctly prevents dropping production/staging databases
+5. **"Attempting to drop a non-preview database"**: Only databases ending with `_preview` can be dropped

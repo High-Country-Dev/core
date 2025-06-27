@@ -3,7 +3,7 @@ name: Publish Clean Up Preview Deployment Action
 on:
   push:
     branches:
-      - main
+      - feat/adding-environment-config
     paths:
       - actions/clean-up-preview-deployment/src/**
       - Dockerfile.clean-up-preview-deployment-action
