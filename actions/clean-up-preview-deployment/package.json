@@ -1,0 +1,34 @@
+{
+  "name": "@mtndev/clean-up-preview-deployment",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "node ../../scripts/build/build.js",
+    "clean": "node ../../scripts/build/clean.js",
+    "format": "prettier --check src --ignore-path ../../.gitignore --ignore-path ../../.prettierignore",
+    "lint": "eslint src  --max-warnings 0 --report-unused-disable-directives",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
+  },
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "@actions/github": "^5.1.1",
+    "@mtndev/environment-config": "0.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./package.json": "./package.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/High-Country-Dev/core.git",
+    "directory": "actions/clean-up-preview-deployment"
+  }
+}

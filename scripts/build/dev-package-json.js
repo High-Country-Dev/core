@@ -6,18 +6,23 @@ import { program } from 'commander';
 import { glob } from 'glob';
 import { readPackageJson, writePackageJson } from './utils.js';
 
+const workspaces = ['actions', 'configs', 'packages'];
+
+const packagesGlobs = workspaces.map((workspace) => `${workspace}/*/src`);
+
 program.option('-w, --watch', 'Watches for file changes', false).parse();
 
 /** @typedef {import('type-fest').SetRequired<import('type-fest').PackageJson, 'name'>} PackageJson */
 
 /** @param {string} path */
 function getPackagePath(path) {
-  const match = path.match(/packages\/(.*)\/src/);
-  if (!match) return;
-  const [, pkg] = match;
-  if (!pkg) return;
+  const match = path.match(new RegExp(`^(${workspaces.join('|')})/(.*)/src$`));
 
-  return join(process.cwd(), 'packages', pkg);
+  if (!match) return;
+  const [, workspace, pkg] = match;
+  if (!workspace || !pkg) return;
+
+  return join(process.cwd(), workspace, pkg);
 }
 
 /** @param {string} path */
@@ -25,7 +30,7 @@ function getPackageName(path) {
   return basename(path);
 }
 
-const packages = glob.sync('packages/*/src');
+const packages = glob.sync(packagesGlobs);
 const packagesFolderNameToPackageJSONMap = packages.reduce(
   (accumulator, pkg) => {
     const packageFolderName = getPackageName(dirname(pkg));
@@ -49,6 +54,8 @@ const packagesFilteringInformation = Object.values(
   packagesFolderNameToPackageJSONMap,
 ).reduce(
   (accumulator, pkgJSON) => {
+    // If `bin` is present in your package.json, we'll assume that the package is a CLI tool and should be
+    // excluded from the dev-package-json script.
     if ('bin' in pkgJSON) {
       accumulator.excludedPackages.add(pkgJSON.name);
     }
@@ -104,7 +111,7 @@ function processDevPackage(path) {
 packages.forEach(processDevPackage);
 
 if (program.opts().watch) {
-  watch('packages/*/src/**', { ignoreInitial: true })
+  watch(packagesGlobs, { ignoreInitial: true })
     .on('add', processDevPackage)
     .on('unlink', processDevPackage)
     .on('unlinkDir', processDevPackage);

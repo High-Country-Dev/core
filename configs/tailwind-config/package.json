@@ -20,6 +20,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/High-Country-Dev/core.git",
-    "directory": "packages/tailwind-config"
+    "directory": "configs/tailwind-config"
   }
 }

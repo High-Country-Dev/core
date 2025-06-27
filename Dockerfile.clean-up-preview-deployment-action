@@ -1,0 +1,31 @@
+# Builder stage
+FROM node:20-alpine AS builder
+
+# Install pnpm globally
+RUN npm install -g pnpm@9.15.4
+
+# Set working directory
+WORKDIR /app
+
+# Copy entire workspace source code
+COPY . ./
+
+# Install dependencies
+RUN pnpm install --frozen-lockfile
+
+# Build the action and its dependencies
+RUN pnpm build --filter=@mtndev/clean-up-preview-deployment
+
+# Action stage
+FROM node:20-alpine AS action
+
+# Set working directory
+WORKDIR /app
+
+# Copy only the essential files
+COPY --from=builder /app/node_modules/ ./node_modules/
+COPY --from=builder /app/actions/clean-up-preview-deployment/ ./actions/clean-up-preview-deployment/
+COPY --from=builder /app/configs/environment-config/ ./configs/environment-config/
+
+# Set the entry point to your action
+ENTRYPOINT ["node", "actions/clean-up-preview-deployment/cjs/index.cjs"]

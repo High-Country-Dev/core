@@ -41,18 +41,21 @@ async function buildPackage(packagePath) {
       ),
   );
 
-  const rootTSConfigPath = path.join(__dirname, '..', '..', 'tsconfig.json');
-  const tsconfig = /** @type {import('../../tsconfig.json')} */ (
-    fse.readJSONSync(rootTSConfigPath)
+  const buildTSConfigPath = path.join(packagePath, 'tsconfig.build.json');
+
+  const tsconfig = /** @type {import('type-fest').TsConfigJson} */ (
+    fse.readJSONSync(buildTSConfigPath)
   );
 
   // Clears the cache file - caching is already handled by turbo.
-  await rm(
-    path.join(
-      packagePath,
-      tsconfig.compilerOptions.tsBuildInfoFile.replace('${configDir}/', ''),
-    ),
+  const tsBuildCachePath = path.join(
+    packagePath,
+    tsconfig.compilerOptions?.tsBuildInfoFile ?? '.cache/tsbuildinfo.json',
   );
+  if (fse.existsSync(tsBuildCachePath)) {
+    await rm(tsBuildCachePath);
+  }
+
   const { status: tscCommandStatus } = spawn.sync(
     'tsc',
     [
@@ -60,6 +63,8 @@ async function buildPackage(packagePath) {
       'tsconfig.build.json',
       '--outDir',
       /** @type {string} */ (builds.esm || builds.cjs),
+      '--tsBuildInfoFile',
+      tsBuildCachePath,
     ],
     { stdio: 'inherit' },
   );

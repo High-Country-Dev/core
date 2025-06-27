@@ -1,2 +1,4 @@
 packages:
+  - actions/*
+  - configs/*
   - packages/*
