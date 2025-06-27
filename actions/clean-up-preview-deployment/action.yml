@@ -10,4 +10,4 @@ inputs:
     required: true
 runs:
   using: 'docker'
-  image: '../../Dockerfile.clean-up-preview-deployment-action'
+  image: ghcr.io/high-country-dev/clean-up-preview-deployment:latest

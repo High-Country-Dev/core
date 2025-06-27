@@ -19,11 +19,13 @@ RUN pnpm build --filter=@mtndev/clean-up-preview-deployment
 # Action stage
 FROM node:20-alpine AS action
 
-# Set working directory to /github/workspace (where GitHub Actions mounts the repo)
-WORKDIR /github/workspace
+# Set working directory
+WORKDIR /app
 
-# Copy the entire built workspace
-COPY --from=builder /app ./
+# Copy only the essential files
+COPY --from=builder /app/node_modules/ ./node_modules/
+COPY --from=builder /app/actions/clean-up-preview-deployment/ ./actions/clean-up-preview-deployment/
+COPY --from=builder /app/configs/environment-config/ ./configs/environment-config/
 
 # Set the entry point to your action
 ENTRYPOINT ["node", "actions/clean-up-preview-deployment/cjs/index.cjs"]
