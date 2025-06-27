@@ -27,7 +27,10 @@ RUN echo "=== Contents of /github/workspace ===" && \
     ls -la actions || echo "actions directory not found" && \
     echo "" && \
     echo "=== Contents of actions/clean-up-preview-deployment ===" && \
-    ls -la actions/clean-up-preview-deployment || echo "clean-up-preview-deployment directory not found"
+    ls -la actions/clean-up-preview-deployment || echo "clean-up-preview-deployment directory not found" && \
+    echo "" && \
+    echo "=== Contents of actions/clean-up-preview-deployment/cjs ===" && \
+    ls -la actions/clean-up-preview-deployment/cjs || echo "cjs directory not found"
 
 
 # Set the entry point to your action
